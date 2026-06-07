@@ -1,0 +1,11 @@
+import { useEffect, useState } from 'react';
+import api from '../api/client';
+import DiscoveryCard from '../components/DiscoveryCard';
+
+export default function Search() {
+  const [users,setUsers]=useState([]); const [filters,setFilters]=useState({q:'',gender:'Any',state:'',city:'',radius:'100',activity:'any',show_demo:true});
+  const search=async()=>{const params=new URLSearchParams({...filters,show_demo:filters.show_demo?'1':'0'});const {data}=await api.get(`/search-users.php?${params}`);setUsers(data.users||[]);};
+  useEffect(()=>{const timer=setTimeout(search,250);return()=>clearTimeout(timer);},[filters]);
+  const update=(key,value)=>setFilters(current=>({...current,[key]:value}));
+  return <main className="discovery-page"><section className="panel discovery-filters"><div><h1>Find people</h1><p>Nearby real users are prioritized. Exact locations are never shown.</p></div><input className="form-control" placeholder="Search name, username or bio" value={filters.q} onChange={e=>update('q',e.target.value)} /><div className="filter-grid"><select className="form-select" value={filters.gender} onChange={e=>update('gender',e.target.value)}><option>Any</option><option>Male</option><option>Female</option><option>Other</option></select><input className="form-control" placeholder="State" value={filters.state} onChange={e=>update('state',e.target.value)} /><input className="form-control" placeholder="City" value={filters.city} onChange={e=>update('city',e.target.value)} /><select className="form-select" value={filters.radius} onChange={e=>update('radius',e.target.value)}>{[5,10,25,50,100].map(r=><option key={r} value={r}>Within {r} km</option>)}</select><select className="form-select" value={filters.activity} onChange={e=>update('activity',e.target.value)}><option value="any">Any activity</option><option value="online">Online now</option><option value="recent">Recently active</option></select><label className="demo-toggle"><input type="checkbox" checked={filters.show_demo} onChange={e=>update('show_demo',e.target.checked)} /> Show Demo / AI profiles</label></div></section><section className="discovery-grid">{users.map(u=><DiscoveryCard key={u.id} user={u} onChanged={search} />)}{!users.length&&<div className="empty-state">No matching profiles found.</div>}</section></main>;
+}

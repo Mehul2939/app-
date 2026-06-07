@@ -1,0 +1,26 @@
+{
+  "name": "myself",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "call-server": "node signaling-server/server.js"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "axios": "latest",
+    "bootstrap": "latest",
+    "bootstrap-icons": "latest",
+    "vite": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-router-dom": "latest",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "mysql2": "^3.14.1"
+  },
+  "devDependencies": {}
+}

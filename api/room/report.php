@@ -1,0 +1,2 @@
+<?php
+require_once __DIR__ . '/../helpers/rooms.php';$me=current_user();$d=input();$id=(int)($d['room_id']??0);$reason=clean_string($d['reason']??'',255);if(!$id||!$reason)json_response(['success'=>false,'message'=>'Reason required'],422);db()->prepare('INSERT INTO room_reports(room_id,reporter_id,reported_user_id,reason) VALUES(?,?,?,?)')->execute([$id,$me['id'],(int)($d['user_id']??0)?:null,$reason]);json_response(['success'=>true,'message'=>'Report submitted']);

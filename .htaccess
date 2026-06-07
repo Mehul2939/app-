@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /app/
+  RewriteRule ^sitemap\.xml$ sitemap.xml.php [L]
+  RewriteRule ^sitemap-posts\.xml$ sitemap-posts.xml.php [L]
+  RewriteRule ^sitemap-profiles\.xml$ sitemap-profiles.xml.php [L]
+  RewriteRule ^robots\.txt$ robots.txt.php [L]
+  RewriteRule ^post/([a-zA-Z0-9-]+)/?$ post.php?slug=$1 [L,QSA]
+  RewriteRule ^stories/([a-zA-Z0-9-]+)/?$ story.php?slug=$1 [L,QSA]
+  RewriteRule ^stories/?$ stories.php [L,QSA]
+  RewriteRule ^admin(?:/.*)?$ public/index.html [L,QSA]
+  RewriteRule ^user/([a-zA-Z0-9_-]+)/?$ user.php?username=$1 [L,QSA]
+  RewriteRule ^category/([a-zA-Z0-9-]+)/?$ taxonomy.php?type=category&slug=$1 [L,QSA]
+  RewriteRule ^tag/([a-zA-Z0-9-]+)/?$ taxonomy.php?type=tag&slug=$1 [L,QSA]
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  RewriteRule ^ index.html [L]
+</IfModule>
