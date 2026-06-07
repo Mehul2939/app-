@@ -19,7 +19,7 @@ Complete PHP MySQL + React social media starter for Hostinger/XAMPP.
    npm run build
    ```
 
-For XAMPP local frontend development, run `npm run dev` and open the Vite URL. After `npm run build`, the production frontend is in `public`, so XAMPP can serve `http://localhost/app/public`.
+For XAMPP local frontend development, run `npm run dev` and open the Vite URL. After `npm run build`, the production frontend is in `dist`, so XAMPP can serve `http://localhost/app/dist`.
 
 ## Defaults
 
@@ -66,8 +66,8 @@ process; otherwise deploy only the signaling service on a Node-capable host.
 ## Voice and video rooms
 
 - Apply `migrations_rooms_system.sql` for the full room database module.
-- Rooms list: `http://localhost/app/public/rooms`
-- Create room: `http://localhost/app/public/rooms/create`
+- Rooms list: `http://localhost/app/dist/rooms`
+- Create room: `http://localhost/app/dist/rooms/create`
 - Realtime room events run on the same Socket.io server:
   ```powershell
   npm.cmd run call-server
@@ -77,12 +77,12 @@ process; otherwise deploy only the signaling service on a Node-capable host.
 
 ## Stories and admin
 
-- Stories SPA: `http://localhost/app/public/stories`
+- Stories SPA: `http://localhost/app/dist/stories`
 - Crawlable Stories listing: `http://localhost/app/stories`
 - Crawlable Story detail: `http://localhost/app/stories/{slug}`
 - Admin login: `http://localhost/app/admin/login`
 - Admin registration: `http://localhost/app/admin/register` (Super Admin only)
-- Admin portal is separate from public user login/registration. Legacy `/app/public/admin/...` links redirect to the clean admin portal.
+- Admin portal is separate from public user login/registration. Legacy `/app/dist/admin/...` links redirect to the clean admin portal.
 
 ## Friend finder discovery
 
@@ -99,4 +99,4 @@ process; otherwise deploy only the signaling service on a Node-capable host.
 
 ## Hostinger
 
-Upload the built `public` contents as the public site files, keep the `api` folder beside it, import `database.sql`, then update `api/config/db.php` with Hostinger database credentials.
+Upload the built `dist` contents as the public site files, keep the `api` folder beside it, import `database.sql`, then update `api/config/db.php` with Hostinger database credentials.
